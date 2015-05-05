@@ -1,7 +1,7 @@
 Note.create(
-  name: "Sample Note",
-  person: "Mr. Person",
-  text: "Lots of text goes here."
+  name: "Mr. Person",
+  place: "Bowling Alley",
+  text: "Lots of text goes here.\n Scored a 300."
 )
 
 puts "#{Note.count} Notes created"

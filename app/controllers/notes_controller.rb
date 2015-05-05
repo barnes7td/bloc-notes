@@ -17,18 +17,16 @@ class NotesController < ApplicationController
   end
   
   def upload
-    notes = FileParser.parse(params[:file].path)
-    
-    notes.each do |note|
-      note = Note.new(
-        name: params[:name],
-        person: note[0],
-        text: note[1].join("\n")
-      )
-      note.save
-    end
+    Note.batch_import(params[:file].path)
+    flash[:success] = "File successfully imported!"
     
     redirect_to :root
+  end
+  
+  def search
+    @search = params[:search]
+    @notes = Note.where("name LIKE ? OR place LIKE ?", "%#{@search}%", "%#{@search}%")
+    render :index
   end
   
   private
